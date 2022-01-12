@@ -4,20 +4,18 @@ public class Main {
 
     public static void main(String[] args) {
         BankAccount bankAccount = new BankAccount();
-        bankAccount.deposit(20000);
+        bankAccount.deposit(50000);
         boolean isFinished = true;
         while (isFinished) {
             try {
                 bankAccount.withDraw(6000);
                 System.out.println(bankAccount.getAmount());
             } catch (LimitException le) {
-                System.out.println(le.getMessage());
                 try {
-                    bankAccount.withDraw(6000);
+                    bankAccount.withDraw((int) bankAccount.getAmount());
+                    System.out.println("Ваш баланс: " + bankAccount.getAmount());
                 }catch (LimitException e) {
-                    double newBankAccount = bankAccount.getAmount();
-                    newBankAccount -= bankAccount.getAmount();
-                    System.out.println("Ваш счет: " + newBankAccount);
+                    e.getMessage();
                 }
                 isFinished = false;
             }
